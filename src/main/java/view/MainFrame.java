@@ -17,13 +17,14 @@ public class MainFrame extends JFrame {
     private JTabbedPane logoutPane;
     private JTextField textField2;
     private JTextField textField3;
-    private JTextPane textPane1;
+    private JTextPane textPane;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
     private JLabel newPasswordLabel;
     private JLabel newPasswordAgainLabel;
     private JPasswordField passwordField3;
     private JButton removeButton;
+    private JButton logoutButton;
 
 
     public MainFrame()
@@ -63,10 +64,10 @@ public class MainFrame extends JFrame {
                 passwordField2.setVisible(true);
             }
         });
-        newButton.addActionListener(new NewButtonController());
-        changeButton.addActionListener(new ChangeButtonController());
-        removeButton.addActionListener(new RemoveButtonController());
-        logoutPane.addChangeListener(new LogoutController());
+        newButton.addActionListener(new NewButtonController(this));
+        changeButton.addActionListener(new ChangeButtonController(this));
+        removeButton.addActionListener(new RemoveButtonController(this));
+        logoutButton.addActionListener(new LogoutController(this));
     }
 
     public static void main(String[] args)
@@ -77,5 +78,9 @@ public class MainFrame extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+    }
+
+    public JTextPane getTextPane() {
+        return textPane;
     }
 }

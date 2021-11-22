@@ -1,5 +1,7 @@
 package controller;
 
+import view.MainFrame;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,8 +11,15 @@ import java.awt.event.ActionListener;
 //TODO: Das System muss das Kennwort verschlüsselt speichern
 
 public class NewButtonController implements ActionListener {
+    private MainFrame mainFrame;
+
+    public NewButtonController(MainFrame mainFrame)
+    {
+        this.mainFrame = mainFrame;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
+        mainFrame.getTextPane().setText("New Button gedrückt");
 
     }
 }
