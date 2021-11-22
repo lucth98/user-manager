@@ -14,6 +14,7 @@ public class LoginFrame extends JFrame{
     private JPasswordField passwordField1;
     private JLabel passwordLabel;
     private JLabel usernameLabel;
+    private JLabel welcomeLabel;
 
 
     public LoginFrame()
