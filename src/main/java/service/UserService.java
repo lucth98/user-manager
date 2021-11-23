@@ -4,17 +4,25 @@ import com.google.gson.Gson;
 import model.User;
 
 import java.io.InputStreamReader;
-import java.util.Objects;
+import java.util.*;
 
 
 public class UserService {
 
+    private static final UserService instance = new UserService();
+
     private final Gson gson = new Gson();
-    private User[] users;
+    private List<User> users;
     private User loggedIn = null;
 
     public UserService() {
-        this.users = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
+        User[] userArray = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
+
+        users = new ArrayList<>(Arrays.asList(userArray));
+    }
+
+    public static UserService getInstance() {
+        return instance;
     }
 
     public boolean login(String username, String password) {
@@ -32,13 +40,21 @@ public class UserService {
         return false;
     }
 
-    public User register(String username, String password, String firstName, String lastName) {
-        //TODO
-        return new User();
+    public void register(String username, String password, String firstName, String lastName) {
+        User user = new User();
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+
+        String passwordHash = PasswordService.encrypt(password);
+        user.setPassword(passwordHash);
+
+        this.users.add(user);
     }
 
     public boolean checkIfUsernameExists(String username) {
-        //TODO
-        return false;
+        return this.users
+                .stream()
+                .anyMatch(user -> user.getUsername().equals(username));
     }
 }

@@ -13,10 +13,10 @@ public class MainFrame extends JFrame {
     private JButton newButton;
     private JButton changeButton;
     private JPanel mainPanel;
-    private JTextField textField1;
+    private JTextField usernameField;
     private JTabbedPane logoutPane;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField firstNameField;
+    private JTextField lastNameField;
     private JTextPane textPane;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
@@ -82,5 +82,21 @@ public class MainFrame extends JFrame {
 
     public JTextPane getTextPane() {
         return textPane;
+    }
+
+    public JTextField getFirstNameField() {
+        return firstNameField;
+    }
+
+    public JTextField getLastNameField() {
+        return lastNameField;
+    }
+
+    public JTextField getUsernameField() {
+        return usernameField;
+    }
+
+    public JTextField getPasswordField() {
+        return passwordField3;
     }
 }
