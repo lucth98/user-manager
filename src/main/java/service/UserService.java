@@ -25,14 +25,23 @@ public class UserService {
         return instance;
     }
 
-    public boolean login(String username, String password) {
-        //TODO
-        return false;
+    public boolean login(String username, String password) throws NoSuchElementException {
+        Optional<User> foundUser = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
+        if (foundUser.isPresent() && foundUser.get().getPassword().equals(password)){
+            loggedIn = foundUser.get();
+            return true;
+        }else {
+            throw new NoSuchElementException("Incorrect username or password");
+        }
     }
 
-    public boolean logout(String username) {
-        //TODO
-        return false;
+    public boolean logout(String username) throws NoSuchElementException{
+        if(checkIfUsernameExists(username) && username.equals(loggedIn.getUsername())){
+            loggedIn = null;
+            return true;
+        }else {
+            throw new NoSuchElementException("There is no user logged in under that name");
+        }
     }
 
     public boolean delete(String username) {
