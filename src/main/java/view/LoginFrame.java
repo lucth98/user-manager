@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame{
-    private JTextField textField1;
+    private JTextField usernameField;
     private JButton loginButton;
     private JButton exitButton;
     private JPanel mainPanel;
@@ -15,8 +15,12 @@ public class LoginFrame extends JFrame{
     private JLabel passwordLabel;
     private JLabel usernameLabel;
     private JLabel welcomeLabel;
+    private JLabel errorLabel;
 
 
+    public static void main(String[] args) {
+        LoginFrame loginFrame = new LoginFrame();
+    }
     public LoginFrame()
     {
         setSize(500,500);
@@ -24,6 +28,7 @@ public class LoginFrame extends JFrame{
         setTitle("Login");
         addActionListener();
         add(mainPanel);
+        errorLabel.setVisible(false);
         setVisible(true);
     }
     public void addActionListener()
@@ -35,5 +40,17 @@ public class LoginFrame extends JFrame{
             }
         });
         loginButton.addActionListener(new LoginController(this));
+    }
+
+    public JTextField getUsernameField1(){
+        return this.usernameField;
+    }
+
+    public JPasswordField getPasswordField1(){
+        return this.passwordField1;
+    }
+
+    public void setErrorLabelVisibility(boolean visible){
+        this.errorLabel.setVisible(visible);
     }
 }

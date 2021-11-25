@@ -4,27 +4,44 @@ import com.google.gson.Gson;
 import model.User;
 
 import java.io.InputStreamReader;
-import java.util.Objects;
+import java.util.*;
 
 
 public class UserService {
 
+    private static final UserService instance = new UserService();
+
     private final Gson gson = new Gson();
-    private User[] users;
+    private List<User> users;
     private User loggedIn = null;
 
-    public UserService() {
-        this.users = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
+    private UserService() {
+        User[] userArray = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
+
+        users = new ArrayList<>(Arrays.asList(userArray));
     }
 
-    public boolean login(String username, String password) {
-        //TODO
-        return false;
+    public static UserService getInstance() {
+        return instance;
     }
 
-    public boolean logout(String username) {
-        //TODO
-        return false;
+    public boolean login(String username, String password){
+        Optional<User> foundUser = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
+        if (foundUser.isPresent() && PasswordService.checkPassword(password,foundUser.get().getPassword())){
+            loggedIn = foundUser.get();
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean logout(String username) throws NoSuchElementException{
+        if(checkIfUsernameExists(username) && username.equals(loggedIn.getUsername())){
+            loggedIn = null;
+            return true;
+        }else {
+            throw new NoSuchElementException("There is no user logged in under that name");
+        }
     }
 
     public boolean delete(String username) {
@@ -32,13 +49,28 @@ public class UserService {
         return false;
     }
 
-    public User register(String username, String password, String firstName, String lastName) {
-        //TODO
-        return new User();
+    public void register(String username, String password, String firstName, String lastName) {
+        User user = new User();
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+
+        String passwordHash = PasswordService.encrypt(password);
+        user.setPassword(passwordHash);
+
+        this.users.add(user);
     }
 
     public boolean checkIfUsernameExists(String username) {
-        //TODO
-        return false;
+        return this.users
+                .stream()
+                .anyMatch(user -> user.getUsername().equals(username));
+    }
+
+    /**
+     * todo persisting changes
+     */
+    public void writeToFile(){
+
     }
 }

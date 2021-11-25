@@ -41,7 +41,7 @@
                   <text value="Last Name"/>
                 </properties>
               </component>
-              <component id="244af" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+              <component id="244af" class="javax.swing.JTextField" binding="firstNameField">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -49,7 +49,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="8c90e" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+              <component id="8c90e" class="javax.swing.JTextField" binding="lastNameField">
                 <constraints>
                   <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
@@ -57,7 +57,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="c409f" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="c409f" class="javax.swing.JTextField" binding="usernameField">
                 <constraints>
                   <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="-1"/>
