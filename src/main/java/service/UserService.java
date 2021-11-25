@@ -15,7 +15,7 @@ public class UserService {
     private List<User> users;
     private User loggedIn = null;
 
-    public UserService() {
+    private UserService() {
         User[] userArray = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
 
         users = new ArrayList<>(Arrays.asList(userArray));
@@ -25,13 +25,13 @@ public class UserService {
         return instance;
     }
 
-    public boolean login(String username, String password) throws NoSuchElementException {
+    public boolean login(String username, String password){
         Optional<User> foundUser = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
-        if (foundUser.isPresent() && foundUser.get().getPassword().equals(password)){
+        if (foundUser.isPresent() && PasswordService.checkPassword(password,foundUser.get().getPassword())){
             loggedIn = foundUser.get();
             return true;
         }else {
-            throw new NoSuchElementException("Incorrect username or password");
+            return false;
         }
     }
 
@@ -65,5 +65,12 @@ public class UserService {
         return this.users
                 .stream()
                 .anyMatch(user -> user.getUsername().equals(username));
+    }
+
+    /**
+     * todo persisting changes
+     */
+    public void writeToFile(){
+
     }
 }
