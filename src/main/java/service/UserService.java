@@ -26,7 +26,7 @@ public class UserService {
     }
 
     public boolean login(String username, String password){
-        Optional<User> foundUser = users.stream().filter(u -> u.getUsername().equals(username)).findFirst();
+        Optional<User> foundUser = checkIfUsernameExists(username);
         if (foundUser.isPresent() && PasswordService.checkPassword(password,foundUser.get().getPassword())){
             loggedIn = foundUser.get();
             return true;
@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public boolean logout(String username) throws NoSuchElementException{
-        if(checkIfUsernameExists(username) && username.equals(loggedIn.getUsername())){
+        if(checkIfUsernameExists(username).isPresent() && username.equals(loggedIn.getUsername())){
             loggedIn = null;
             return true;
         }else {
@@ -45,7 +45,11 @@ public class UserService {
     }
 
     public boolean delete(String username) {
-        //TODO
+        Optional<User> foundUser = checkIfUsernameExists(username);
+        if(foundUser.isPresent()){
+            users.remove(foundUser.get()); 
+            return true;
+        }
         return false;
     }
 
@@ -61,10 +65,10 @@ public class UserService {
         this.users.add(user);
     }
 
-    public boolean checkIfUsernameExists(String username) {
+    public Optional<User> checkIfUsernameExists(String username) {
         return this.users
                 .stream()
-                .anyMatch(user -> user.getUsername().equals(username));
+                .filter(u -> u.getUsername().equals(username)).findFirst();
     }
 
     /**
