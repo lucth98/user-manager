@@ -16,41 +16,45 @@ import view.MainFrame;
 public class LoginController implements ActionListener {
     private LoginFrame loginFrame;
     private int loginCounter = 0;
-    private UserService userService;
+    private final UserService userService;
 
     public LoginController(LoginFrame frame)
     {
         //falls ihr komponenten braucht, mit get methoden holen
         this.loginFrame = frame;
         this.userService = UserService.getInstance();
+        userService.register("dd", "dd", "d", "d");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if(e.getActionCommand().equals("Login"))
         {
-            login();
+            userService.delete("dd");
+            //login();
         }
 
 
         if(e.getActionCommand().equals("Exit"))
         {
-            System.exit(0);
+            //System.exit(0);
         }
     }
 
     private void login(){
-        if(userService.login(loginFrame.getUsernameField1().getText(),
-                Arrays.toString(loginFrame.getPasswordField1().getPassword()))){
+        String username = loginFrame.getUsernameField1().getText();
+        String pwd = new String(loginFrame.getPasswordField1().getPassword());
+        if(userService.login(username, pwd)){
             loginCounter = 0;
             loginFrame.setVisible(false);
             MainFrame mainFrame = new MainFrame();
-        }else{
+        } else{
             loginFrame.setErrorLabelVisibility(true);
-            if (loginCounter ==2){
+            loginCounter++;
+            if (loginCounter ==3){
                 System.err.println("Exceeded maximum number of login attempts");
                 System.exit(-1);
-            }else loginCounter++;
+            }
         }
     }
 }

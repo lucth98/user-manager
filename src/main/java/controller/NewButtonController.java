@@ -25,7 +25,7 @@ public class NewButtonController implements ActionListener {
 
         // Validations
 
-        if (userService.checkIfUsernameExists(username)) {
+        if (userService.checkIfUsernameExists(username).isPresent()) {
             mainFrame.getTextPane().setText("Username existiert bereits");
             return;
         }
