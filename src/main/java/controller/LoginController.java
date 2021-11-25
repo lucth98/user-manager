@@ -30,8 +30,7 @@ public class LoginController implements ActionListener {
 
         if(e.getActionCommand().equals("Login"))
         {
-            userService.delete("dd");
-            //login();
+            login();
         }
 
 

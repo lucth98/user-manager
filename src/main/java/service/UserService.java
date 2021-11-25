@@ -47,7 +47,17 @@ public class UserService {
     public boolean delete(String username) {
         Optional<User> foundUser = checkIfUsernameExists(username);
         if(foundUser.isPresent()){
-            users.remove(foundUser.get()); 
+            users.remove(foundUser.get());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean changePassword(String username, String pwd){
+        Optional<User> foundUser = checkIfUsernameExists(username);
+        if(foundUser.isPresent()){
+            String pwdHash = PasswordService.encrypt(pwd);
+            foundUser.get().setPassword(pwdHash);
             return true;
         }
         return false;
@@ -64,6 +74,7 @@ public class UserService {
 
         this.users.add(user);
     }
+
 
     public Optional<User> checkIfUsernameExists(String username) {
         return this.users
