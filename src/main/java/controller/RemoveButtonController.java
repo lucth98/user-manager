@@ -18,6 +18,6 @@ public class RemoveButtonController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        mainFrame.getTextPane().setText("Remove Button gedrückt");
+        mainFrame.getRegisterErrorField().setText("Remove Button geklickt");
     }
 }

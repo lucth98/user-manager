@@ -12,15 +12,15 @@ import java.awt.event.ActionListener;
 //TODO:Das System muss dem Benutzer die Möglichkeit bieten auszuloggen.
 //TODO: Das System muss den Benutzer nach 60 Sekunden Inaktivität ausloggen
 
-public class LogoutController implements ActionListener {
+public class LogoutButtonController implements ActionListener {
     private MainFrame mainFrame;
 
-    public LogoutController(MainFrame mainFrame)
+    public LogoutButtonController(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        mainFrame.getTextPane().setText("Logout Button gedrückt");
+        mainFrame.getErrorLabel().setText("Logout geklickt");
     }
 }

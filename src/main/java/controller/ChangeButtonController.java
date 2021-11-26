@@ -23,7 +23,7 @@ public class ChangeButtonController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        mainFrame.getTextPane().setText("Change Button gedrückt");
+        mainFrame.getRegisterErrorField().setText("Change Button geklickt");
         
     }
 }

@@ -1,30 +1,43 @@
 package view;
 
-import controller.ChangeButtonController;
-import controller.LogoutController;
-import controller.NewButtonController;
-import controller.RemoveButtonController;
+import controller.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
+
+
+    //login fields
+    private JLabel usernameLabel;
+
+    private JLabel passwordLabel;
+    private JTextField loginUsernameField;
+    private JPasswordField loginPasswordField;
+    private JButton loginButton;
+    //private JLabel errorLabel;
+
+
+    //myaccount/register fields
     private JButton newButton;
     private JButton changeButton;
     private JPanel mainPanel;
-    private JTextField usernameField;
-    private JTabbedPane logoutPane;
+    private JTabbedPane myAccountPane;
     private JTextField firstNameField;
     private JTextField lastNameField;
-    private JTextPane textPane;
-    private JPasswordField passwordField1;
-    private JPasswordField passwordField2;
+    private JPasswordField passwordFieldCreate;
+    private JPasswordField passwordFieldCreateAgain;
     private JLabel newPasswordLabel;
     private JLabel newPasswordAgainLabel;
-    private JPasswordField passwordField3;
+    private JPasswordField passwordField;
     private JButton removeButton;
     private JButton logoutButton;
+    private JTextField usernameField;
+    private JLabel errorLabel;
+    private JLabel registerErrorField;
+    private JButton myDataButton;
+    private JButton clearButton;
 
 
     public MainFrame()
@@ -36,38 +49,36 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(this);
        // initMenuBar();
         addListener();
+        errorLabel.setVisible(false);
+
+        changeButton.setVisible(false);
+        logoutButton.setVisible(false);
+        removeButton.setVisible(false);
+        myDataButton.setVisible(false);
+        clearButton.setVisible(false);
+
         setVisible(true);
 
-
-
     }
-    public void initMenuBar()
-    {
-        JMenuBar bar = new JMenuBar();
 
-        JMenu m = new JMenu("MyAccount");
-        JMenuItem menuItem = new JMenuItem("Beispiel");
-
-          bar.add(m);
-          m.add(menuItem);
-
-        setJMenuBar(bar);
-    }
     public void addListener()
     {
+        loginButton.addActionListener(new LoginController(this));
         changeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 newPasswordLabel.setVisible(true);
                 newPasswordAgainLabel.setVisible(true);
-                passwordField1.setVisible(true);
-                passwordField2.setVisible(true);
+                passwordFieldCreate.setVisible(true);
+                passwordFieldCreateAgain.setVisible(true);
             }
         });
         newButton.addActionListener(new NewButtonController(this));
         changeButton.addActionListener(new ChangeButtonController(this));
         removeButton.addActionListener(new RemoveButtonController(this));
-        logoutButton.addActionListener(new LogoutController(this));
+        logoutButton.addActionListener(new LogoutButtonController(this));
+
+        clearButton.addActionListener(new ClearButtonController(this));
     }
 
     public static void main(String[] args)
@@ -80,9 +91,6 @@ public class MainFrame extends JFrame {
         // TODO: place custom component creation code here
     }
 
-    public JTextPane getTextPane() {
-        return textPane;
-    }
 
     public JTextField getFirstNameField() {
         return firstNameField;
@@ -92,11 +100,65 @@ public class MainFrame extends JFrame {
         return lastNameField;
     }
 
+
+
+    public JTextField getPasswordField() {
+        return passwordField;
+    }
+
+    public JPasswordField getLoginPasswordField() {
+        return loginPasswordField;
+    }
+
+    public JTextField getLoginUsernameField() {
+        return loginUsernameField;
+    }
+
     public JTextField getUsernameField() {
         return usernameField;
     }
 
-    public JTextField getPasswordField() {
-        return passwordField3;
+    public JTabbedPane getMyAccountPane() {
+        return myAccountPane;
+    }
+
+    public JButton getChangeButton() {
+        return changeButton;
+    }
+
+    public JButton getRemoveButton() {
+        return removeButton;
+    }
+
+    public JButton getLogoutButton() {
+        return logoutButton;
+    }
+
+    public JLabel getErrorLabel() {
+        return errorLabel;
+    }
+
+    public JLabel getRegisterErrorField() {
+        return registerErrorField;
+    }
+
+    public JButton getMyDataButton() {
+        return myDataButton;
+    }
+
+    public JButton getClearButton() {
+        return clearButton;
+    }
+
+    public JPasswordField getPasswordFieldCreate() {
+        return passwordFieldCreate;
+    }
+
+    public JPasswordField getPasswordFieldCreateAgain() {
+        return passwordFieldCreateAgain;
+    }
+
+    public void setErrorLabelVisibility(boolean visible){
+        this.errorLabel.setVisible(visible);
     }
 }
