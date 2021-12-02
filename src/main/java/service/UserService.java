@@ -86,25 +86,9 @@ public class UserService {
                 .findFirst();
     }
 
-    public String getUserInfo(String username, String info)
+    public User getUser(String username)
     {
-        User user = new User();
-
-        for(int i = 0; i < users.size();i++)
-        {
-            if(username.equals(users.get(i).getUsername()))
-            {
-                user = users.get(i);
-                break;
-            }
-        }
-        switch(info)
-        {
-            case "password" : return user.getPassword();
-            case "firstname": return user.getFirstName();
-            case "lastname" : return user.getLastName();
-        }
-        return null;
+        return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().get();
     }
 
     public List<User> getUsers() {

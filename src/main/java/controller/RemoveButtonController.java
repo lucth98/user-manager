@@ -1,23 +1,31 @@
 package controller;
 
+import model.User;
+import service.UserService;
 import view.MainFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//TODO: Wenn ein Benutzer eingeloggt ist muss das System dem Benutzer die Möglichkeit bieten seinen Account zu löschen.
-//TODO: (Onur) Wenn der Benutzer den Account löschen will muss der Benutzer eine Sicherheitsabfrage „Wollen Sie den Account wirklich löschen“ bestätigen
 
 
 public class RemoveButtonController implements ActionListener {
 
-    private MainFrame mainFrame;
+    private final MainFrame mainFrame;
+    private final UserService userService;
+
     public RemoveButtonController(MainFrame mainFrame)
     {
         this.mainFrame = mainFrame;
+        this.userService = UserService.getInstance();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        mainFrame.getRegisterErrorField().setText("Remove Button geklickt");
+        //TODO: (Onur) Wenn der Benutzer den Account löschen will muss der Benutzer eine Sicherheitsabfrage „Wollen Sie den Account wirklich löschen“ bestätigen
+        userService.delete(mainFrame.getAccountUsernameField().getText());
+        mainFrame.getMainPane().setEnabledAt(MainFrame.ACCOUNT_PANE_INDEX, false);
+        mainFrame.getMainPane().setEnabledAt(MainFrame.LOGIN_PANE_INDEX, true);
+        mainFrame.getMainPane().setEnabledAt(MainFrame.REGISTER_PANE_INDEX, true);
+        mainFrame.getMainPane().setSelectedIndex(MainFrame.LOGIN_PANE_INDEX);
     }
 }
