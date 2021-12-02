@@ -1,9 +1,7 @@
 package service;
 
-import com.google.gson.Gson;
 import model.User;
 
-import java.io.InputStreamReader;
 import java.util.*;
 
 
@@ -11,14 +9,16 @@ public class UserService {
 
     private static final UserService instance = new UserService();
 
-    private final Gson gson = new Gson();
-    private List<User> users;
+    private final List<User> users;
     private User loggedIn = null;
+    private final FileService fileService = new FileService();
 
     private UserService() {
-        User[] userArray = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
+        users = fileService.getUsers();
+    }
 
-        users = new ArrayList<>(Arrays.asList(userArray));
+    private void saveUsersToFile() {
+        fileService.saveUsers(users);
     }
 
     public static UserService getInstance() {
@@ -48,6 +48,7 @@ public class UserService {
         Optional<User> foundUser = checkIfUsernameExists(username);
         if(foundUser.isPresent()){
             users.remove(foundUser.get());
+            saveUsersToFile();
             return true;
         }
         return false;
@@ -58,6 +59,7 @@ public class UserService {
         if(foundUser.isPresent()){
             String pwdHash = PasswordService.encrypt(pwd);
             foundUser.get().setPassword(pwdHash);
+            saveUsersToFile();
             return true;
         }
         return false;
@@ -73,13 +75,15 @@ public class UserService {
         user.setPassword(passwordHash);
 
         this.users.add(user);
+        saveUsersToFile();
     }
 
 
     public Optional<User> checkIfUsernameExists(String username) {
         return this.users
                 .stream()
-                .filter(u -> u.getUsername().equals(username)).findFirst();
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst();
     }
 
     public String getUserInfo(String username, String info)
@@ -101,10 +105,6 @@ public class UserService {
             case "lastname" : return user.getLastName();
         }
         return null;
-    }
-
-    public Gson getGson() {
-        return gson;
     }
 
     public List<User> getUsers() {
