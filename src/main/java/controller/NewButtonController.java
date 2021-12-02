@@ -16,6 +16,8 @@ public class NewButtonController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        mainFrame.getRegisterErrorField().setText("New Button geklickt");
         UserService userService = UserService.getInstance();
 
         String username = mainFrame.getUsernameField().getText();
@@ -26,7 +28,7 @@ public class NewButtonController implements ActionListener {
         // Validations
 
         if (userService.checkIfUsernameExists(username).isPresent()) {
-            mainFrame.getTextPane().setText("Username existiert bereits");
+
             return;
         }
 
@@ -34,6 +36,6 @@ public class NewButtonController implements ActionListener {
 
         userService.register(username, password, firstName, lastName);
 
-        mainFrame.getTextPane().setText("User wurde erfolgreich angelegt.");
+        mainFrame.getRegisterErrorField().setText("User wurde erfolgreich angelegt");
     }
 }

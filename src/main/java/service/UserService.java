@@ -15,7 +15,7 @@ public class UserService {
     private List<User> users;
     private User loggedIn = null;
 
-    private UserService() {
+    public UserService() {
         User[] userArray = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
 
         users = new ArrayList<>(Arrays.asList(userArray));
@@ -80,6 +80,39 @@ public class UserService {
         return this.users
                 .stream()
                 .filter(u -> u.getUsername().equals(username)).findFirst();
+    }
+
+    public String getUserInfo(String username, String info)
+    {
+        User user = new User();
+
+        for(int i = 0; i < users.size();i++)
+        {
+            if(username.equals(users.get(i).getUsername()))
+            {
+                user = users.get(i);
+                break;
+            }
+        }
+        switch(info)
+        {
+            case "password" : return user.getPassword();
+            case "firstname": return user.getFirstName();
+            case "lastname" : return user.getLastName();
+        }
+        return null;
+    }
+
+    public Gson getGson() {
+        return gson;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public User getLoggedIn() {
+        return loggedIn;
     }
 
     /**
