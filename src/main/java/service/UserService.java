@@ -15,7 +15,7 @@ public class UserService {
     private List<User> users;
     private User loggedIn = null;
 
-    public UserService() {
+    private UserService() {
         User[] userArray = gson.fromJson(new InputStreamReader(Objects.requireNonNull(UserService.class.getResourceAsStream("/users.json"))), User[].class);
 
         users = new ArrayList<>(Arrays.asList(userArray));

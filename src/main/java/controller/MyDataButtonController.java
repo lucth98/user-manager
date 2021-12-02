@@ -20,7 +20,7 @@ public class MyDataButtonController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        UserService userService = new UserService();
+        UserService userService = UserService.getInstance();
         String firstName = userService.getUserInfo(username,"firstname");
         String lastName = userService.getUserInfo(username,"lastname");
 
