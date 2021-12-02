@@ -64,15 +64,6 @@ public class MainFrame extends JFrame {
     public void addListener()
     {
         loginButton.addActionListener(new LoginController(this));
-        changeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newPasswordLabel.setVisible(true);
-                newPasswordAgainLabel.setVisible(true);
-                passwordFieldCreate.setVisible(true);
-                passwordFieldCreateAgain.setVisible(true);
-            }
-        });
         newButton.addActionListener(new NewButtonController(this));
         changeButton.addActionListener(new ChangeButtonController(this));
         removeButton.addActionListener(new RemoveButtonController(this));
@@ -99,8 +90,6 @@ public class MainFrame extends JFrame {
     public JTextField getLastNameField() {
         return lastNameField;
     }
-
-
 
     public JTextField getPasswordField() {
         return passwordField;
@@ -156,6 +145,21 @@ public class MainFrame extends JFrame {
 
     public JPasswordField getPasswordFieldCreateAgain() {
         return passwordFieldCreateAgain;
+    }
+
+    public JLabel getNewPasswordLabel() {
+        return newPasswordLabel;
+    }
+
+    public JLabel getNewPasswordAgainLabel() {
+        return newPasswordAgainLabel;
+    }
+
+    public void setChangePasswordFieldsVisibilty(boolean visible){
+        newPasswordLabel.setVisible(visible);
+        newPasswordAgainLabel.setVisible(visible);
+        passwordFieldCreate.setVisible(visible);
+        passwordFieldCreateAgain.setVisible(visible);
     }
 
     public void setErrorLabelVisibility(boolean visible){

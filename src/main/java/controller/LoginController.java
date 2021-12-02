@@ -34,7 +34,7 @@ public class LoginController implements ActionListener {
 
         if(e.getActionCommand().equals("Exit"))
         {
-            //System.exit(0);
+            System.exit(0);
         }
     }
 
@@ -58,6 +58,7 @@ public class LoginController implements ActionListener {
             mainFrame.getUsernameField().setText(username);
 
             mainFrame.getErrorLabel().setText("Hello "+userService.getUserInfo(username,"firstname")+", you are logged in");
+            mainFrame.getRegisterErrorField().setText("");
 
             mainFrame.getErrorLabel().setForeground(Color.green);
             mainFrame.getErrorLabel().setVisible(true);
