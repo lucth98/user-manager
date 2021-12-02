@@ -3,87 +3,68 @@ package view;
 import controller.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
 
+    private JPanel mainPanel;
+    private JTabbedPane mainPane;
+    private JLabel errorLabel;
 
     //login fields
     private JLabel usernameLabel;
-
     private JLabel passwordLabel;
     private JTextField loginUsernameField;
     private JPasswordField loginPasswordField;
     private JButton loginButton;
     //private JLabel errorLabel;
 
+    //register fields
+    private JTextField registerFirstNameField;
+    private JTextField registerLastNameField;
+    private JTextField registerUsernameField;
+    private JPasswordField registerPasswordField;
+    private JButton registerButton;
+    private JLabel registerErrorField;
 
-    //myaccount/register fields
-    private JButton newButton;
-    private JButton changeButton;
-    private JPanel mainPanel;
-    private JTabbedPane myAccountPane;
-    private JTextField firstNameField;
-    private JTextField lastNameField;
-    private JPasswordField passwordFieldCreate;
-    private JPasswordField passwordFieldCreateAgain;
-    private JLabel newPasswordLabel;
-    private JLabel newPasswordAgainLabel;
-    private JPasswordField passwordField;
+    //account fields
     private JButton removeButton;
     private JButton logoutButton;
-    private JTextField usernameField;
-    private JLabel errorLabel;
-    private JLabel registerErrorField;
-    private JButton myDataButton;
-    private JButton clearButton;
+    private JButton updateButton;
+    private JTextField accountFirstNameField;
+    private JTextField accountLastnameField;
+    private JTextField accountUsernameField;
+    private JPasswordField accountPasswordField;
+    private JPasswordField accountRepeatPasswordField;
 
+    public static final int LOGIN_PANE_INDEX = 0;
+    public static final int REGISTER_PANE_INDEX = 1;
+    public static final int ACCOUNT_PANE_INDEX = 2;
 
     public MainFrame()
     {
         setContentPane(mainPanel);
-        setTitle("MyAccount");
-        setSize(500,500);
+        setTitle("User Manager");
+        setSize(1000,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(this);
-       // initMenuBar();
         addListener();
         errorLabel.setVisible(false);
-
-        changeButton.setVisible(false);
         logoutButton.setVisible(false);
-        removeButton.setVisible(false);
-        myDataButton.setVisible(false);
-        clearButton.setVisible(false);
-
+        mainPane.setEnabledAt(2, false);
         setVisible(true);
-
     }
 
     public void addListener()
     {
         loginButton.addActionListener(new LoginController(this));
-        changeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newPasswordLabel.setVisible(true);
-                newPasswordAgainLabel.setVisible(true);
-                passwordFieldCreate.setVisible(true);
-                passwordFieldCreateAgain.setVisible(true);
-            }
-        });
-        newButton.addActionListener(new NewButtonController(this));
-        changeButton.addActionListener(new ChangeButtonController(this));
+        registerButton.addActionListener(new RegisterButtonController(this));
         removeButton.addActionListener(new RemoveButtonController(this));
         logoutButton.addActionListener(new LogoutButtonController(this));
-
-        clearButton.addActionListener(new ClearButtonController(this));
+        updateButton.addActionListener(new UpdatePasswordButtonController(this));
     }
 
     public static void main(String[] args)
     {
-        // LoginForm l = new LoginForm();
         MainFrame n = new MainFrame();
     }
 
@@ -91,19 +72,16 @@ public class MainFrame extends JFrame {
         // TODO: place custom component creation code here
     }
 
-
     public JTextField getFirstNameField() {
-        return firstNameField;
+        return registerFirstNameField;
     }
 
-    public JTextField getLastNameField() {
-        return lastNameField;
+    public JTextField getRegisterLastNameField() {
+        return registerLastNameField;
     }
-
-
 
     public JTextField getPasswordField() {
-        return passwordField;
+        return registerPasswordField;
     }
 
     public JPasswordField getLoginPasswordField() {
@@ -114,16 +92,12 @@ public class MainFrame extends JFrame {
         return loginUsernameField;
     }
 
-    public JTextField getUsernameField() {
-        return usernameField;
+    public JTextField getRegisterUsernameField() {
+        return registerUsernameField;
     }
 
-    public JTabbedPane getMyAccountPane() {
-        return myAccountPane;
-    }
-
-    public JButton getChangeButton() {
-        return changeButton;
+    public JTabbedPane getMainPane() {
+        return mainPane;
     }
 
     public JButton getRemoveButton() {
@@ -138,27 +112,28 @@ public class MainFrame extends JFrame {
         return errorLabel;
     }
 
-    public JLabel getRegisterErrorField() {
-        return registerErrorField;
-    }
-
-    public JButton getMyDataButton() {
-        return myDataButton;
-    }
-
-    public JButton getClearButton() {
-        return clearButton;
-    }
-
-    public JPasswordField getPasswordFieldCreate() {
-        return passwordFieldCreate;
-    }
-
-    public JPasswordField getPasswordFieldCreateAgain() {
-        return passwordFieldCreateAgain;
-    }
 
     public void setErrorLabelVisibility(boolean visible){
         this.errorLabel.setVisible(visible);
+    }
+
+    public JTextField getAccountFirstNameField() {
+        return accountFirstNameField;
+    }
+
+    public JTextField getAccountLastnameField() {
+        return accountLastnameField;
+    }
+
+    public JTextField getAccountUsernameField() {
+        return accountUsernameField;
+    }
+
+    public JPasswordField getAccountPasswordField() {
+        return accountPasswordField;
+    }
+
+    public JPasswordField getAccountRepeatPasswordField() {
+        return accountRepeatPasswordField;
     }
 }
