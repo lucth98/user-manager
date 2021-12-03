@@ -47,6 +47,7 @@ public class LogoutButtonController implements ActionListener {
     //TODO: calling start & reset
     private void startTimer(){
         TimerTask timerTask =new TimerTask() {
+
             @Override
             public void run() {
                 logout();
