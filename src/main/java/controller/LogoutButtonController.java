@@ -57,6 +57,7 @@ public class LogoutButtonController implements ActionListener {
         LocalDateTime localDateTime=LocalDateTime.now().plus(Duration.of(1, ChronoUnit.MINUTES));
         Date date=Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
+
         timer.schedule(timerTask,date);
     }
 
