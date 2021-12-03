@@ -25,28 +25,28 @@ public class UserService {
         return instance;
     }
 
-    public boolean login(String username, String password){
+    public boolean login(String username, String password) {
         Optional<User> foundUser = checkIfUsernameExists(username);
-        if (foundUser.isPresent() && PasswordService.checkPassword(password,foundUser.get().getPassword())){
+        if (foundUser.isPresent() && PasswordService.checkPassword(password, foundUser.get().getPassword())) {
             loggedIn = foundUser.get();
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public boolean logout(String username) throws NoSuchElementException{
-        if(checkIfUsernameExists(username).isPresent() && username.equals(loggedIn.getUsername())){
+    public boolean logout(String username) throws NoSuchElementException {
+        if (checkIfUsernameExists(username).isPresent() && username.equals(loggedIn.getUsername())) {
             loggedIn = null;
             return true;
-        }else {
+        } else {
             throw new NoSuchElementException("There is no user logged in under that name");
         }
     }
 
     public boolean delete(String username) {
         Optional<User> foundUser = checkIfUsernameExists(username);
-        if(foundUser.isPresent()){
+        if (foundUser.isPresent()) {
             users.remove(foundUser.get());
             saveUsersToFile();
             return true;
@@ -54,9 +54,9 @@ public class UserService {
         return false;
     }
 
-    public boolean changePassword(String username, String pwd){
+    public boolean changePassword(String username, String pwd) {
         Optional<User> foundUser = checkIfUsernameExists(username);
-        if(foundUser.isPresent()){
+        if (foundUser.isPresent()) {
             String pwdHash = PasswordService.encrypt(pwd);
             foundUser.get().setPassword(pwdHash);
             saveUsersToFile();
@@ -86,8 +86,7 @@ public class UserService {
                 .findFirst();
     }
 
-    public User getUser(String username)
-    {
+    public User getUser(String username) {
         return users.stream().filter(user -> user.getUsername().equals(username)).findFirst().get();
     }
 
@@ -102,7 +101,7 @@ public class UserService {
     /**
      * todo persisting changes
      */
-    public void writeToFile(){
+    public void writeToFile() {
 
     }
 }

@@ -10,10 +10,10 @@ import java.awt.event.ActionListener;
 public class RegisterButtonController extends ControllerSubject implements ActionListener {
     private final MainFrame mainFrame;
 
-    public RegisterButtonController(MainFrame mainFrame)
-    {
+    public RegisterButtonController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         UserService userService = UserService.getInstance();
@@ -25,9 +25,10 @@ public class RegisterButtonController extends ControllerSubject implements Actio
 
         if (userService.checkIfUsernameExists(username).isPresent()) {
             //TODO open dialog with already exists message
-            return;
-        }
+            System.err.println("username already exists");
 
-        userService.register(username, password, firstName, lastName);
+        } else {
+            userService.register(username, password, firstName, lastName);
+        }
     }
 }

@@ -1,35 +1,30 @@
 package controller;
 
-import com.sun.tools.javac.Main;
 import service.UserService;
 import view.MainFrame;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class LogoutButtonController  implements ActionListener ,ControllerObserver {
+public class LogoutButtonController implements ActionListener, ControllerObserver {
     private final MainFrame mainFrame;
     private final UserService userService;
 
-    private Timer timer=new Timer();
+    private Timer timer = new Timer();
 
-    public LogoutButtonController(MainFrame mainFrame)
-    {
+    public LogoutButtonController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.userService = UserService.getInstance();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         logout();
@@ -43,11 +38,10 @@ public class LogoutButtonController  implements ActionListener ,ControllerObserv
         mainFrame.getMainPane().setSelectedIndex(MainFrame.LOGIN_PANE_INDEX);
     }
 
-
     //TODO: calling start & reset
-    private void startTimer(){
-        timer=new Timer();
-        TimerTask timerTask =new TimerTask() {
+    private void startTimer() {
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 logout();
@@ -55,17 +49,16 @@ public class LogoutButtonController  implements ActionListener ,ControllerObserv
         };
 
         //setting date = now +1 min
-        LocalDateTime localDateTime=LocalDateTime.now().plus(Duration.of(1, ChronoUnit.MINUTES));
-        Date date=Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        LocalDateTime localDateTime = LocalDateTime.now().plus(Duration.of(1, ChronoUnit.MINUTES));
+        Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-        timer.schedule(timerTask,date);
+        timer.schedule(timerTask, date);
     }
 
-    private void resetTimer(){
+    private void resetTimer() {
         timer.cancel();
         startTimer();
     }
-
 
     @Override
     public void update() {

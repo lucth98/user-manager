@@ -54,7 +54,7 @@ public class LoginController extends ControllerSubject implements ActionListener
             if (loginCounter == 3) {
                 System.err.println("Exceeded maximum number of login attempts");
                 System.exit(-1);
-            }else {
+            } else {
                 System.err.println("username or password not correct");
             }
         }

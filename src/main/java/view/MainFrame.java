@@ -40,11 +40,10 @@ public class MainFrame extends JFrame {
     public static final int REGISTER_PANE_INDEX = 1;
     public static final int ACCOUNT_PANE_INDEX = 2;
 
-    public MainFrame()
-    {
+    public MainFrame() {
         setContentPane(mainPanel);
         setTitle("User Manager");
-        setSize(1000,800);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(this);
         addListener();
@@ -54,13 +53,12 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
-    public void addListener()
-    {
-        RegisterButtonController registerButtonController=new RegisterButtonController(this);
-        LoginController loginController =new LoginController(this);
-        RemoveButtonController removeButtonController=new RemoveButtonController(this);
-        UpdatePasswordButtonController updatePasswordButtonController=new UpdatePasswordButtonController(this);
-        LogoutButtonController logoutButtonController=new LogoutButtonController(this);
+    public void addListener() {
+        RegisterButtonController registerButtonController = new RegisterButtonController(this);
+        LoginController loginController = new LoginController(this);
+        RemoveButtonController removeButtonController = new RemoveButtonController(this);
+        UpdatePasswordButtonController updatePasswordButtonController = new UpdatePasswordButtonController(this);
+        LogoutButtonController logoutButtonController = new LogoutButtonController(this);
 
         loginController.addObserver(logoutButtonController);
         updatePasswordButtonController.addObserver(logoutButtonController);
@@ -72,8 +70,7 @@ public class MainFrame extends JFrame {
         updateButton.addActionListener(updatePasswordButtonController);
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         MainFrame n = new MainFrame();
     }
 
@@ -122,7 +119,7 @@ public class MainFrame extends JFrame {
     }
 
 
-    public void setErrorLabelVisibility(boolean visible){
+    public void setErrorLabelVisibility(boolean visible) {
         this.errorLabel.setVisible(visible);
     }
 

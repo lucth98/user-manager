@@ -12,11 +12,11 @@ public class UpdatePasswordButtonController extends ControllerSubject implements
     private final MainFrame mainFrame;
     private final UserService userService;
 
-    public UpdatePasswordButtonController(MainFrame mainFrame)
-    {
+    public UpdatePasswordButtonController(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.userService = UserService.getInstance();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (Arrays.equals(mainFrame.getAccountPasswordField().getPassword(), mainFrame.getAccountRepeatPasswordField().getPassword())) {
