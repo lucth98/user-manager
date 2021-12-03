@@ -48,7 +48,6 @@ public class LogoutButtonController  implements ActionListener ,ControllerObserv
     private void startTimer(){
         timer=new Timer();
         TimerTask timerTask =new TimerTask() {
-
             @Override
             public void run() {
                 logout();
