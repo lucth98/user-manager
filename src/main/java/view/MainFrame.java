@@ -56,11 +56,20 @@ public class MainFrame extends JFrame {
 
     public void addListener()
     {
-        loginButton.addActionListener(new LoginController(this));
-        registerButton.addActionListener(new RegisterButtonController(this));
-        removeButton.addActionListener(new RemoveButtonController(this));
-        logoutButton.addActionListener(new LogoutButtonController(this));
-        updateButton.addActionListener(new UpdatePasswordButtonController(this));
+        RegisterButtonController registerButtonController=new RegisterButtonController(this);
+        LoginController loginController =new LoginController(this);
+        RemoveButtonController removeButtonController=new RemoveButtonController(this);
+        UpdatePasswordButtonController updatePasswordButtonController=new UpdatePasswordButtonController(this);
+        LogoutButtonController logoutButtonController=new LogoutButtonController(this);
+
+        loginController.addObserver(logoutButtonController);
+        updatePasswordButtonController.addObserver(logoutButtonController);
+
+        loginButton.addActionListener(loginController);
+        registerButton.addActionListener(registerButtonController);
+        removeButton.addActionListener(removeButtonController);
+        logoutButton.addActionListener(logoutButtonController);
+        updateButton.addActionListener(updatePasswordButtonController);
     }
 
     public static void main(String[] args)

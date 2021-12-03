@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 
 
-public class RemoveButtonController implements ActionListener {
+public class RemoveButtonController extends ControllerSubject implements ActionListener {
 
     private final MainFrame mainFrame;
     private final UserService userService;
@@ -27,5 +27,7 @@ public class RemoveButtonController implements ActionListener {
         mainFrame.getMainPane().setEnabledAt(MainFrame.LOGIN_PANE_INDEX, true);
         mainFrame.getMainPane().setEnabledAt(MainFrame.REGISTER_PANE_INDEX, true);
         mainFrame.getMainPane().setSelectedIndex(MainFrame.LOGIN_PANE_INDEX);
+
+        notifyObserver();
     }
 }

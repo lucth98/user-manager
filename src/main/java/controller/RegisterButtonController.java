@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class RegisterButtonController implements ActionListener {
+public class RegisterButtonController extends ControllerSubject implements ActionListener {
     private final MainFrame mainFrame;
 
     public RegisterButtonController(MainFrame mainFrame)

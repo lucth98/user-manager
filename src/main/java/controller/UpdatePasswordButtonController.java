@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 
-public class UpdatePasswordButtonController implements ActionListener {
+public class UpdatePasswordButtonController extends ControllerSubject implements ActionListener {
     private final MainFrame mainFrame;
     private final UserService userService;
 
@@ -24,5 +24,7 @@ public class UpdatePasswordButtonController implements ActionListener {
         } else {
             //TODO Open dialog if passwords are not equal
         }
+
+        notifyObserver();
     }
 }

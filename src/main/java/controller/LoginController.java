@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 //TODO: Wenn username oder password nicht mit den gespeicherten übereinstimmen muss das System die Fehlermeldung „username oder password nicht korrekt“ ausgeben.
 
-public class LoginController implements ActionListener {
+public class LoginController extends ControllerSubject implements ActionListener {
     private final MainFrame mainFrame;
     private int loginCounter = 0;
     private final UserService userService;
@@ -23,6 +23,7 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Login")) {
             login();
+            notifyObserver();
         }
     }
 

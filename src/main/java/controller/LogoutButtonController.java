@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class LogoutButtonController implements ActionListener {
+public class LogoutButtonController  implements ActionListener ,ControllerObserver {
     private final MainFrame mainFrame;
     private final UserService userService;
 
@@ -46,6 +46,7 @@ public class LogoutButtonController implements ActionListener {
 
     //TODO: calling start & reset
     private void startTimer(){
+        timer=new Timer();
         TimerTask timerTask =new TimerTask() {
 
             @Override
@@ -58,7 +59,6 @@ public class LogoutButtonController implements ActionListener {
         LocalDateTime localDateTime=LocalDateTime.now().plus(Duration.of(1, ChronoUnit.MINUTES));
         Date date=Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-
         timer.schedule(timerTask,date);
     }
 
@@ -68,4 +68,8 @@ public class LogoutButtonController implements ActionListener {
     }
 
 
+    @Override
+    public void update() {
+        resetTimer();
+    }
 }
