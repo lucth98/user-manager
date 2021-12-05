@@ -25,6 +25,8 @@ public class RegisterButtonController extends ControllerSubject implements Actio
 
         if (userService.checkIfUsernameExists(username).isPresent()) {
             //TODO open dialog with already exists message
+            mainFrame.getRegisterErrorField().setText("username already exists");
+            mainFrame.setRegisterErrorFieldVisibility(true);
             System.err.println("username already exists");
 
         } else {

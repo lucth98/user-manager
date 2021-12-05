@@ -92,7 +92,6 @@
                 <properties>
                   <font name="Consolas"/>
                   <foreground color="-4253919"/>
-                  <text/>
                 </properties>
               </component>
               <component id="dfd46" class="javax.swing.JButton" binding="loginButton" default-binding="true">
@@ -421,6 +420,16 @@
                   </grid>
                 </constraints>
                 <properties/>
+              </component>
+              <component id="760b8" class="javax.swing.JLabel" binding="accountErrorMsg">
+                <constraints>
+                  <grid row="7" column="6" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <foreground color="-4521978"/>
+                  <text value="Label"/>
+                  <visible value="false"/>
+                </properties>
               </component>
             </children>
           </grid>
