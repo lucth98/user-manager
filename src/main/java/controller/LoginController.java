@@ -49,6 +49,7 @@ public class LoginController extends ControllerSubject implements ActionListener
             mainFrame.getLoginUsernameField().setText("");
             mainFrame.getLoginPasswordField().setText("");
         } else {
+            mainFrame.getErrorLabel().setText("username or password incorrect");
             mainFrame.setErrorLabelVisibility(true);
             loginCounter++;
             if (loginCounter == 3) {

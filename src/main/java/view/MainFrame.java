@@ -35,6 +35,7 @@ public class MainFrame extends JFrame {
     private JTextField accountUsernameField;
     private JPasswordField accountPasswordField;
     private JPasswordField accountRepeatPasswordField;
+    private JLabel accountErrorMsg;
 
     public static final int LOGIN_PANE_INDEX = 0;
     public static final int REGISTER_PANE_INDEX = 1;
@@ -118,9 +119,24 @@ public class MainFrame extends JFrame {
         return errorLabel;
     }
 
-
     public void setErrorLabelVisibility(boolean visible) {
         this.errorLabel.setVisible(visible);
+    }
+
+    public JLabel getRegisterErrorField(){
+        return this.registerErrorField;
+    }
+
+    public void setRegisterErrorFieldVisibility(boolean visible){
+        this.registerErrorField.setVisible(visible);
+    }
+
+    public JLabel getAccountErrorMsg(){
+        return accountErrorMsg;
+    }
+
+    public void setAccountErrorMsgVisibility(boolean visible){
+        this.accountErrorMsg.setVisible(visible);
     }
 
     public JTextField getAccountFirstNameField() {

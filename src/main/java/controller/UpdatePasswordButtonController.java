@@ -21,7 +21,11 @@ public class UpdatePasswordButtonController extends ControllerSubject implements
     public void actionPerformed(ActionEvent e) {
         if (Arrays.equals(mainFrame.getAccountPasswordField().getPassword(), mainFrame.getAccountRepeatPasswordField().getPassword())) {
             userService.changePassword(mainFrame.getAccountUsernameField().getText(), new String(mainFrame.getAccountPasswordField().getPassword()));
+            mainFrame.getAccountErrorMsg().setText("Password changed sucessfully");
+            mainFrame.setAccountErrorMsgVisibility(true);
         } else {
+            mainFrame.getAccountErrorMsg().setText("Given passwords do not match");
+            mainFrame.setAccountErrorMsgVisibility(true);
             //TODO Open dialog if passwords are not equal
         }
 
