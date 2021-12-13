@@ -1,8 +1,17 @@
 package service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UserServiceTest {
+
+    UserService userService;
+
+    @BeforeEach
+    void setUp(){
+        userService = UserService.getInstance();
+    }
+
     @Test
     void getInstance() {
     }

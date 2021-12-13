@@ -1,11 +1,19 @@
 package service;
+import org.junit.jupiter.api.*;
 
 public class FileServiceTest {
-    @org.junit.jupiter.api.Test
+    FileService fileService;
+
+    @BeforeEach
+    void setUp() {
+        fileService = new FileService();
+    }
+
+    @Test
     void getUsers() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void saveUsers() {
     }
 }
