@@ -97,11 +97,4 @@ public class UserService {
     public User getLoggedIn() {
         return loggedIn;
     }
-
-    /**
-     * todo persisting changes
-     */
-    public void writeToFile() {
-
-    }
 }
